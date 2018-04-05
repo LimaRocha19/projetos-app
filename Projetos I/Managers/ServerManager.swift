@@ -186,7 +186,6 @@ class ServerManager {
     class func forgot(email: String, fake: Bool = false, completion: @escaping (RequestStatus<String>) -> Void) {
 
         if fake {
-            avaliable = false
             completion(.success("Cheque seu email para modificar sua senha"))
             return
         }
@@ -241,13 +240,13 @@ class ServerManager {
             }
 
             let json = JSON(value)
-            let devices = json["devices"].json.flatMap({ Place(json: $0) })
+            let devices = json["devices"].json.flatMap({ Device(json: $0) })
             ServerManager.cache["devices"] = devices
-            completion(.success(places))
+            completion(.success(devices))
         }
     }
 
-    class func message(topic: String, key:String, value: String, fake: Bool = false, completion: @escaping (RequestStatus<Device>)) {
+    class func message(topic: String, key:String, value: String, fake: Bool = false, completion: @escaping (RequestStatus<Device>) -> Void) {
 
         if fake {
             let device = Device(name: "TV da Sala", topic: "tv12345", closed: true, working: true, onDelay: 5, offDelay: 20*60)
@@ -286,7 +285,7 @@ class ServerManager {
         }
     }
 
-    class func delete(topic: String, fake: Bool = false, completion: @escaping (RequestStatus<String>)) {
+    class func delete(topic: String, fake: Bool = false, completion: @escaping (RequestStatus<String>) -> Void) {
 
         if fake {
             let message = "Dispositivo deletado com sucesso"

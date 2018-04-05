@@ -15,12 +15,11 @@ class User: NSObject {
     var email: String
 
     init(username: String, email: String) {
-        super.init()
         self.username = username
         self.email = email
     }
 
-    convenience init?(json: JSON) {
+    convenience init?(json: JSON?) {
         guard let json = json
             , let username = json["username"].string
             , let email = json["email"].string else {

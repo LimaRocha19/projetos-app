@@ -19,7 +19,6 @@ class Device: NSObject {
     var offDelay: Double
 
     init(name: String, topic: String, closed: Bool, working: Bool, onDelay: Double, offDelay: Double) {
-        super.init()
         self.name = name
         self.topic = topic
         self.closed = closed
@@ -28,7 +27,7 @@ class Device: NSObject {
         self.offDelay = offDelay
     }
 
-    convenience init?(json: JSON) {
+    convenience init?(json: JSON?) {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -36,7 +35,7 @@ class Device: NSObject {
         guard let json = json
             , let name = json["name"].string
             , let topic = json["topic"].string
-            , let closed = json["closed"].string
+            , let closed = json["closed"].bool
             , let lastUpdated = json["last_updated"].string
             , let onDelay = json["onDelay"].double
             , let offDelay = json["offDelay"].double
