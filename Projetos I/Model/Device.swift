@@ -44,10 +44,12 @@ class Device: NSObject {
                 return nil
         }
 
+        var working = true
+
         if (Date().timeIntervalSince1970 - lastUpdt.timeIntervalSince1970) >= 30 {
-            self.working = false
-        } else {
-            self.working = true
+            working = false
         }
+
+        self.init(name: name, topic: topic, closed: closed, working: working, onDelay: onDelay, offDelay: offDelay)
     }
 }
