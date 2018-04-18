@@ -36,7 +36,7 @@ class LoginVC: UITableViewController {
 
         let send = UIAlertAction(title: "Enviar", style: .default) { (action) in
             self.spinner.startAnimating()
-            ServerManager.forgot(email: self.textField.text!, fake: true, completion: { (status) in
+            ServerManager.forgot(email: self.textField.text!, fake: false, completion: { (status) in
                 self.spinner.stopAnimating()
                 switch status {
                 case .success(let msg):
@@ -67,7 +67,7 @@ class LoginVC: UITableViewController {
         }
 
         self.spinner.startAnimating()
-        ServerManager.signin(params: ["username" : self.usernameTF.text!, "password" : self.passwordTF.text!], fake: true) { (status) in
+        ServerManager.signin(params: ["username" : self.usernameTF.text!, "password" : self.passwordTF.text!], fake: false) { (status) in
             switch status {
             case .success(let user):
                 ServerManager.user = user
@@ -81,7 +81,7 @@ class LoginVC: UITableViewController {
 
     func logged() {
         self.spinner.startAnimating()
-        ServerManager.profile(fake: true) { (status) in
+        ServerManager.profile(fake: false) { (status) in
             switch status {
             case .success(let user):
                 print(#function, user)

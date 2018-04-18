@@ -28,7 +28,7 @@ class MainVC: UITableViewController {
         super.viewDidAppear(animated)
 
         self.spinner.startAnimating()
-        ServerManager.devices(fake: true, cached: true) { (status) in
+        ServerManager.devices(fake: false, cached: true) { (status) in
             self.spinner.stopAnimating()
             switch status {
             case .success(let devices):

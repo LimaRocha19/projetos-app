@@ -42,7 +42,7 @@ class SignupVC: UITableViewController {
 
         self.spinner.startAnimating()
 
-        ServerManager.signup(params: ["username" : self.usernameTF.text!, "email" : self.emailTF.text!, "password" : self.passwordTF.text!], fake: true) { (status) in
+        ServerManager.signup(params: ["username" : self.usernameTF.text!, "email" : self.emailTF.text!, "password" : self.passwordTF.text!], fake: false) { (status) in
             self.spinner.stopAnimating()
 
             switch status {
