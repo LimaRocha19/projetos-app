@@ -62,7 +62,7 @@ class ServerManager {
     class func signup(params: [String: String], fake: Bool = false, completion: @escaping (RequestStatus<User>) -> Void) {
 
         if fake {
-            let usr = User(username: "thiaguera", email: "thaigo.martins@gmail.com")
+            let usr = User(username: "thiaguera", email: "thiago.martins@gmail.com")
             completion(.success(usr))
             return
         }
