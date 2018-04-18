@@ -61,11 +61,35 @@ class LoginVC: UITableViewController {
     }
 
     func login() {
+        if self.usernameTF.text! == "" || self.passwordTF.text! == "" {
+            self.showAlertController(withTitle: "Error :(", andMessage: "Preencha os dados corretamente!")
+            return
+        }
 
+        self.spinner.startAnimating()
+        ServerManager.signin(params: ["username" : self.usernameTF.text!, "password" : self.passwordTF.text!], fake: true) { (status) in
+            switch status {
+            case .success(let user):
+                ServerManager.user = user
+                print(#function, user)
+                self.performSegue(withIdentifier: "login", sender: self)
+            case .failure(let error):
+                self.showAlertController(withTitle: "Erro :(", andMessage: error.localizedDescription)
+            }
+        }
     }
 
     func logged() {
-
+        self.spinner.startAnimating()
+        ServerManager.profile(fake: true) { (status) in
+            switch status {
+            case .success(let user):
+                print(#function, user)
+                self.performSegue(withIdentifier: "login", sender: self)
+            case.failure(let error):
+                self.showAlertController(withTitle: "Err :(", andMessage: error.localizedDescription)
+            }
+        }
     }
 }
 

@@ -214,7 +214,7 @@ class ServerManager {
 
         if fake {
             let device = Device(name: "TV da Sala", topic: "tv12345", closed: true, working: true, onDelay: 5, offDelay: 20*60)
-            completion(.success([device]))
+            completion(.success([device, device, device, device, device, device]))
             return
         }
 
@@ -271,7 +271,7 @@ class ServerManager {
             let json = JSON(value)
             let success = json["success"].boolValue
             if success {
-                let message = json["message"].stringValue
+//                let message = json["message"].stringValue
                 guard let device = Device(json: json["device"].json) else {
                     let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "O app está incompatível com as respostas do servidor."]) as Error
                     completion(.failure(error))
@@ -318,5 +318,13 @@ class ServerManager {
                 completion(.failure(error))
             }
         }
+    }
+
+    class func logoff(completion: () -> Void) {
+
+        user = User(username: "default", email: "default@default.com")
+        cookie = nil
+        self.cache = [:]
+        completion()
     }
 }

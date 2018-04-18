@@ -14,6 +14,8 @@
 		E45634EB2075979700BE88C3 /* Projetos_ITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45634EA2075979700BE88C3 /* Projetos_ITests.swift */; };
 		E46AA8BF2087F84E00A8A3FF /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8BE2087F84E00A8A3FF /* CustomUI.swift */; };
 		E46AA8C22087FA3A00A8A3FF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */; };
+		E46AA8C42087FFAE00A8A3FF /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */; };
+		E46AA8C62088084700A8A3FF /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8C52088084700A8A3FF /* MainVC.swift */; };
 		E481E43C207599AE0081F9ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E481E43B207599AE0081F9ED /* User.swift */; };
 		E481E43E20759AEF0081F9ED /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = E481E43D20759AEF0081F9ED /* Device.swift */; };
 		E481E4412075A35D0081F9ED /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E481E4402075A35D0081F9ED /* ServerManager.swift */; };
@@ -44,6 +46,8 @@
 		E45634EC2075979700BE88C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E46AA8BE2087F84E00A8A3FF /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		E46AA8C52088084700A8A3FF /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		E481E43B207599AE0081F9ED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E481E43D20759AEF0081F9ED /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		E481E4402075A35D0081F9ED /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */,
+				E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */,
+				E46AA8C52088084700A8A3FF /* MainVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -283,9 +289,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E481E4412075A35D0081F9ED /* ServerManager.swift in Sources */,
+				E46AA8C42087FFAE00A8A3FF /* SignupVC.swift in Sources */,
 				E45634D62075979600BE88C3 /* AppDelegate.swift in Sources */,
 				E46AA8C22087FA3A00A8A3FF /* LoginVC.swift in Sources */,
 				E481E43C207599AE0081F9ED /* User.swift in Sources */,
+				E46AA8C62088084700A8A3FF /* MainVC.swift in Sources */,
 				E46AA8BF2087F84E00A8A3FF /* CustomUI.swift in Sources */,
 				E481E43E20759AEF0081F9ED /* Device.swift in Sources */,
 			);
