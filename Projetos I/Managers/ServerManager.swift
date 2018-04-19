@@ -242,22 +242,22 @@ class ServerManager {
             }
 
             let json = JSON(value)
-//            let devices = json["devices"].json.flatMap({ (jsn) -> Device? in
-//                return Device(json: jsn)
-//            })
+            let devices = json["devices"].json.flatMap({ (jsn) -> Device? in
+                return Device(json: jsn)
+            })
 
-            guard let devArray = json["devices"].jsonArray else {
-                let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "Esta sessão foi expirada, faça login novamente"]) as Error
-                completion(.failure(error))
-                return
-            }
-            var devices: [Device] = []
-            for devJsn in devArray {
-                let device = Device(json: devJsn)
-                if device != nil {
-                    devices.append(device!)
-                }
-            }
+//            guard let devArray = json["devices"].jsonArray else {
+//                let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "Esta sessão foi expirada, faça login novamente"]) as Error
+//                completion(.failure(error))
+//                return
+//            }
+//            var devices: [Device] = []
+//            for devJsn in devArray {
+//                let device = Device(json: devJsn)
+//                if device != nil {
+//                    devices.append(device!)
+//                }
+//            }
             ServerManager.cache["devices"] = devices
             completion(.success(devices))
         }
@@ -330,6 +330,49 @@ class ServerManager {
             if success {
                 let message = json["message"].stringValue
                 completion(.success(message))
+            } else {
+                let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : json["message"].stringValue]) as Error
+                completion(.failure(error))
+            }
+        }
+    }
+
+    class func add(topic: String, name: String, fake: Bool = false, completion: @escaping (RequestStatus<Device>) -> Void) {
+
+        if fake {
+            let device = Device(name: name, topic: topic, closed: true, working: true, onDelay: 5, offDelay: 20*60)
+            completion(.success(device))
+            return
+        }
+
+        guard let cookie = cookie else {
+            let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "Esta sessão foi expirada, faça login novamente"]) as Error
+            completion(.failure(error))
+            return
+        }
+        HTTPCookieStorage.shared.setCookie(cookie)
+
+        let parameters: Parameters = ["topic" : topic, "name" : name]
+        Alamofire.request(API.device("add"), method: .post, parameters: parameters, encoding: URLEncoding.default).responseJSON { (response) in
+            guard let value = response.result.value else {
+                let error = response.result.error!
+                completion(.failure(error))
+                return
+            }
+
+            let json = JSON(value)
+            let success = json["success"].boolValue
+            if success {
+                guard let device = Device(json: json["device"].json) else {
+                    let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "Os dados do dispositivo adicionado não puderam ser lidos. Entre no app novamente para ver se ele foi salvo e, caso não tenha sido, adicione-o novamente"]) as Error
+                    completion(.failure(error))
+                    return
+                }
+                if var devices = ServerManager.cache["devices"] as? [Device] {
+                    devices.append(device)
+                    ServerManager.cache["devices"] = devices
+                }
+                completion(.success(device))
             } else {
                 let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : json["message"].stringValue]) as Error
                 completion(.failure(error))

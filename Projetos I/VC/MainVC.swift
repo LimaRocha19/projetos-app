@@ -12,6 +12,8 @@ class MainVC: UITableViewController {
 
     fileprivate var devices: [Device] = []
     fileprivate var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    fileprivate var topicTF: UITextField!
+    fileprivate var nameTF: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,10 @@ class MainVC: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.fetch()
+    }
 
+    func fetch() {
         self.spinner.startAnimating()
         ServerManager.devices(fake: false, cached: true) { (status) in
             self.spinner.stopAnimating()
@@ -49,6 +54,35 @@ class MainVC: UITableViewController {
     }
 
     @IBAction func add(_ sender: Any) {
+        let controller = UIAlertController(title: "Novo Dispositivo", message: "Preencha os dados abaixo", preferredStyle: .alert)
+        let add = UIAlertAction(title: "Adicionar", style: .default) { (action) in
+            self.spinner.startAnimating()
+            let topic = self.topicTF.text!
+            let name = self.nameTF.text!
+            ServerManager.add(topic: topic, name: name, completion: { (status) in
+                self.spinner.stopAnimating()
+                switch status {
+                case .success(let dev):
+                    print(#function, dev)
+                    self.fetch()
+                case .failure(let error):
+                    self.showAlertController(withTitle: "Error :(", andMessage: error.localizedDescription)
+                }
+            })
+        }
+        let cancel = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+        controller.addTextField { (tf) in
+            tf.placeholder = "Nome"
+            self.nameTF = tf
+        }
+        controller.addTextField { (tf) in
+            tf.placeholder = "Tópico"
+            self.topicTF = tf
+        }
+        controller.addAction(add)
+        controller.addAction(cancel)
+
+        self.present(controller, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
