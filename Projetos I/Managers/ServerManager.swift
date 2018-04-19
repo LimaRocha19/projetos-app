@@ -240,7 +240,22 @@ class ServerManager {
             }
 
             let json = JSON(value)
-            let devices = json["devices"].json.flatMap({ Device(json: $0) })
+//            let devices = json["devices"].json.flatMap({ (jsn) -> Device? in
+//                return Device(json: jsn)
+//            })
+
+            guard let devArray = json["devices"].jsonArray else {
+                let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : "Esta sessão foi expirada, faça login novamente"]) as Error
+                completion(.failure(error))
+                return
+            }
+            var devices: [Device] = []
+            for devJsn in devArray {
+                let device = Device(json: devJsn)
+                if device != nil {
+                    devices.append(device!)
+                }
+            }
             ServerManager.cache["devices"] = devices
             completion(.success(devices))
         }
