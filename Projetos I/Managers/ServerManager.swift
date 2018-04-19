@@ -218,10 +218,12 @@ class ServerManager {
             return
         }
 
-        if let devices = ServerManager.cache["devices"] as? [Device] {
-            if !devices.isEmpty {
-                completion(.success(devices))
-                return
+        if cached {
+            if let devices = ServerManager.cache["devices"] as? [Device] {
+                if !devices.isEmpty {
+                    completion(.success(devices))
+                    return
+                }
             }
         }
 
