@@ -1,3 +1,5 @@
 github "Alamofire/Alamofire" "4.7.1"
 github "delba/JASON" "v3.1"
+github "daltoniam/Starscream" "3.0.5"
 github "Alamofire/AlamofireImage" "3.3.1"
+github "socketio/socket.io-client-swift" "v13.1.3"
