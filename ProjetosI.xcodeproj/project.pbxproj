@@ -12,6 +12,9 @@
 		E45634DD2075979700BE88C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E45634DC2075979700BE88C3 /* Assets.xcassets */; };
 		E45634E02075979700BE88C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E45634DE2075979700BE88C3 /* LaunchScreen.storyboard */; };
 		E45634EB2075979700BE88C3 /* Projetos_ITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45634EA2075979700BE88C3 /* Projetos_ITests.swift */; };
+		E45CFB5B20897F120070565A /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45CFB5920897F120070565A /* SocketIO.framework */; };
+		E45CFB5C20897F120070565A /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45CFB5A20897F120070565A /* Starscream.framework */; };
+		E45CFB5E2089807F0070565A /* DeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45CFB5D2089807F0070565A /* DeviceVC.swift */; };
 		E46AA8BF2087F84E00A8A3FF /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8BE2087F84E00A8A3FF /* CustomUI.swift */; };
 		E46AA8C22087FA3A00A8A3FF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */; };
 		E46AA8C42087FFAE00A8A3FF /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */; };
@@ -44,6 +47,9 @@
 		E45634E62075979700BE88C3 /* ProjetosITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjetosITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45634EA2075979700BE88C3 /* Projetos_ITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projetos_ITests.swift; sourceTree = "<group>"; };
 		E45634EC2075979700BE88C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E45CFB5920897F120070565A /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
+		E45CFB5A20897F120070565A /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		E45CFB5D2089807F0070565A /* DeviceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceVC.swift; sourceTree = "<group>"; };
 		E46AA8BE2087F84E00A8A3FF /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -61,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45CFB5B20897F120070565A /* SocketIO.framework in Frameworks */,
+				E45CFB5C20897F120070565A /* Starscream.framework in Frameworks */,
 				E481E4462075CF220081F9ED /* AlamofireImage.framework in Frameworks */,
 				E481E4472075CF220081F9ED /* Alamofire.framework in Frameworks */,
 				E481E4482075CF220081F9ED /* JASON.framework in Frameworks */,
@@ -135,6 +143,7 @@
 				E46AA8C12087FA3A00A8A3FF /* LoginVC.swift */,
 				E46AA8C32087FFAE00A8A3FF /* SignupVC.swift */,
 				E46AA8C52088084700A8A3FF /* MainVC.swift */,
+				E45CFB5D2089807F0070565A /* DeviceVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -159,6 +168,8 @@
 		E481E4422075CF210081F9ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E45CFB5920897F120070565A /* SocketIO.framework */,
+				E45CFB5A20897F120070565A /* Starscream.framework */,
 				E481E4442075CF210081F9ED /* Alamofire.framework */,
 				E481E4432075CF210081F9ED /* AlamofireImage.framework */,
 				E481E4452075CF220081F9ED /* JASON.framework */,
@@ -273,6 +284,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/JASON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
 			);
 			name = "Run Script - Carthage";
 			outputPaths = (
@@ -292,6 +305,7 @@
 				E46AA8C42087FFAE00A8A3FF /* SignupVC.swift in Sources */,
 				E45634D62075979600BE88C3 /* AppDelegate.swift in Sources */,
 				E46AA8C22087FA3A00A8A3FF /* LoginVC.swift in Sources */,
+				E45CFB5E2089807F0070565A /* DeviceVC.swift in Sources */,
 				E481E43C207599AE0081F9ED /* User.swift in Sources */,
 				E46AA8C62088084700A8A3FF /* MainVC.swift in Sources */,
 				E46AA8BF2087F84E00A8A3FF /* CustomUI.swift in Sources */,

@@ -15,6 +15,19 @@ class MainVC: UITableViewController {
     fileprivate var topicTF: UITextField!
     fileprivate var nameTF: UITextField!
 
+    fileprivate var selected: Device!
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "device" {
+            guard let controller = segue.destination as? DeviceVC else {
+                return
+            }
+            controller.data = ["token" : ServerManager.token,
+                               "user_id": ServerManager.user._id,
+                               "device_id": self.selected.topic]
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -100,6 +113,11 @@ class MainVC: UITableViewController {
         cell.textLabel?.text = device.name
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selected = self.devices[indexPath.row]
+        self.performSegue(withIdentifier: "device", sender: self)
     }
 }
 

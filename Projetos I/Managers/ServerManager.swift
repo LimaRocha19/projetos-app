@@ -19,7 +19,8 @@ enum RequestStatus<T> {
 class ServerManager {
 
     static var cache: [String : Any] = [:]
-    static var user: User = User(username: "default", email: "default@default.com")
+    static var token: String = ""
+    static var user: User = User(username: "default", email: "default@default.com", _id: "098765431")
 
     private struct API {
 
@@ -62,7 +63,7 @@ class ServerManager {
     class func signup(params: [String: String], fake: Bool = false, completion: @escaping (RequestStatus<User>) -> Void) {
 
         if fake {
-            let usr = User(username: "thiaguera", email: "thiago.martins@gmail.com")
+            let usr = User(username: "thiaguera", email: "thiago.martins@gmail.com", _id: "1234567890")
             completion(.success(usr))
             return
         }
@@ -94,6 +95,7 @@ class ServerManager {
                     return
                 }
                 ServerManager.user = theUser
+                ServerManager.token = json["token"].string ?? ""
                 completion(.success(theUser))
             } else {
                 let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : json["message"].stringValue]) as Error
@@ -105,7 +107,7 @@ class ServerManager {
     class func signin(params: [String: String], fake: Bool = false, completion: @escaping (RequestStatus<User>) -> Void) {
 
         if fake {
-            let usr = User(username: "thiaguera", email: "thaigo.martins@gmail.com")
+            let usr = User(username: "thiaguera", email: "thaigo.martins@gmail.com", _id: "06543456789")
             completion(.success(usr))
             return
         }
@@ -137,6 +139,7 @@ class ServerManager {
                     return
                 }
                 ServerManager.user = theUser
+                ServerManager.token = json["token"].string ?? ""
                 completion(.success(theUser))
             } else {
                 let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : json["message"].stringValue]) as Error
@@ -175,6 +178,7 @@ class ServerManager {
                     return
                 }
                 ServerManager.user = theUser
+                ServerManager.token = json["token"].string ?? ""
                 completion(.success(theUser))
             } else {
                 let error = NSError(domain: NSCocoaErrorDomain, code: 404, userInfo: [NSLocalizedDescriptionKey : json["message"].stringValue]) as Error
@@ -382,7 +386,7 @@ class ServerManager {
 
     class func logoff(completion: () -> Void) {
 
-        user = User(username: "default", email: "default@default.com")
+        user = User(username: "default", email: "default@default.com", _id: "0987654321")
         cookie = nil
         self.cache = [:]
         completion()

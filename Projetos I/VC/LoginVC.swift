@@ -82,6 +82,7 @@ class LoginVC: UITableViewController {
     func logged() {
         self.spinner.startAnimating()
         ServerManager.profile(fake: false) { (status) in
+            self.spinner.stopAnimating()
             switch status {
             case .success(let user):
                 print(#function, user)
