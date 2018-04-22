@@ -332,6 +332,12 @@ class ServerManager {
             let json = JSON(value)
             let success = json["success"].boolValue
             if success {
+
+                if var devices = ServerManager.cache["devices"] as? [Device] {
+                    devices = devices.filter({ $0.topic != topic })
+                    ServerManager.cache["devices"] = devices
+                }
+
                 let message = json["message"].stringValue
                 completion(.success(message))
             } else {
