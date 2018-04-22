@@ -17,11 +17,30 @@ class LoginVC: UITableViewController {
     fileprivate var user: User!
     fileprivate var textField: UITextField!
 
+    fileprivate var userData: (String, String) {
+        get {
+            let defaults = UserDefaults.standard
+            guard let usern = defaults.object(forKey: "usern") as? String
+                , let passw = defaults.object(forKey: "passw") as? String else {
+                    return ("", "")
+            }
+            return (usern, passw)
+        } set(dt) {
+            let defaults = UserDefaults.standard
+            defaults.set(dt.0, forKey: "usern")
+            defaults.set(dt.1, forKey: "passw")
+            defaults.synchronize()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.usernameTF.delegate = self
         self.passwordTF.delegate = self
+
+        self.usernameTF.text = self.userData.0
+        self.passwordTF.text = self.userData.1
 
         if ServerManager.isLogged {
             self.logged()
@@ -68,6 +87,11 @@ class LoginVC: UITableViewController {
 
         self.spinner.startAnimating()
         ServerManager.signin(params: ["username" : self.usernameTF.text!, "password" : self.passwordTF.text!], fake: false) { (status) in
+
+            let usern = self.usernameTF.text!
+            let passw = self.passwordTF.text!
+            self.userData = (usern, passw)
+
             switch status {
             case .success(let user):
                 ServerManager.user = user
